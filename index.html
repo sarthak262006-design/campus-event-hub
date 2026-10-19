@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Study Planner</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f2f6ff; margin: 0; color: #222; }
+    header { background: #3157c8; color: white; text-align: center; padding: 25px 12px; }
+    main { max-width: 700px; margin: 25px auto; padding: 0 15px; }
+    .card { background: white; padding: 20px; margin-bottom: 18px; border-radius: 12px; box-shadow: 0 3px 12px #00000012; }
+    h1, h2 { margin-top: 0; }
+    input, select, button { padding: 11px; border-radius: 7px; border: 1px solid #ccd2df; font-size: 15px; }
+    input { width: 55%; max-width: 320px; }
+    button { background: #3157c8; color: white; border: none; cursor: pointer; }
+    button:hover { background: #2343a5; }
+    li { padding: 10px 0; border-bottom: 1px solid #eee; }
+    .done { text-decoration: line-through; color: #777; }
+    footer { text-align: center; color: #666; padding: 20px; }
+    @media (max-width: 520px) { input { width: 90%; margin-bottom: 8px; } select { margin-bottom: 8px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Study Planner</h1>
+    <p>Plan your tasks. Finish on time.</p>
+  </header>
+  <main>
+    <section class="card">
+      <h2>Add a Study Task</h2>
+      <form id="task-form">
+        <input id="task-name" type="text" placeholder="Enter task name" required>
+        <select id="subject">
+          <option>DevOps</option>
+          <option>DBMS</option>
+          <option>Machine Learning</option>
+          <option>Cloud Computing</option>
+          <option>Other</option>
+        </select>
+        <button type="submit">Add Task</button>
+      </form>
+    </section>
+    <section class="card">
+      <h2>My Tasks (<span id="count">0</span>)</h2>
+      <ul id="task-list"></ul>
+      <p id="empty">No tasks yet. Add your first study task!</p>
+    </section>
+  </main>
+  <footer>ISE-2 DevOps and Kubernetes Project</footer>
+  <script>
+    const form = document.getElementById('task-form');
+    const nameInput = document.getElementById('task-name');
+    const subjectInput = document.getElementById('subject');
+    const list = document.getElementById('task-list');
+    const empty = document.getElementById('empty');
+    const count = document.getElementById('count');
+    let tasks = [];
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const name = nameInput.value.trim();
+      if (name === '') return;
+
+      tasks.push({ name: name, subject: subjectInput.value, done: false });
+      nameInput.value = '';
+      showTasks();
+    });
+
+    function showTasks() {
+      list.innerHTML = '';
+      tasks.forEach(function(task, index) {
+        const item = document.createElement('li');
+        const label = document.createElement('span');
+        label.textContent = task.name + ' (' + task.subject + ') ';
+        if (task.done) label.className = 'done';
+
+        const doneButton = document.createElement('button');
+        doneButton.textContent = task.done ? 'Undo' : 'Done';
+        doneButton.style.marginRight = '6px';
+        doneButton.addEventListener('click', function() {
+          tasks[index].done = !tasks[index].done;
+          showTasks();
+        });
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', function() {
+          tasks.splice(index, 1);
+          showTasks();
+        });
+
+        item.append(label, doneButton, deleteButton);
+        list.appendChild(item);
+      });
+      count.textContent = tasks.length;
+      empty.style.display = tasks.length === 0 ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
