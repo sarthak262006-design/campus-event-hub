@@ -43,5 +43,22 @@ The Jenkinsfile defines a pipeline to check out the repository and validate requ
 - At least five meaningful commits
 - Jenkins pipeline and build-result screenshots
 
+  ## Website Features
+
+- Displays campus events in organized cards.
+- Allows students to search for events.
+- Filters events by category.
+- Shows event dates and venues.
+- Includes a Register Interest button.
+- Provides a responsive layout for mobile and desktop screens.
+
+## How to Use
+
+1. Open index.html in a web browser.
+2. Browse the available sample events.
+3. Search for an event or select a category.
+4. Click Register Interest to mark your interest.
+5. Click Interested again to undo your selection.
+
 ## Note
 The displayed events are sample events for demonstration purposes.
