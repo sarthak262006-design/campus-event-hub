@@ -3,98 +3,460 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Study Planner</title>
+  <title>Campus Event Hub</title>
+
   <style>
-    body { font-family: Arial, sans-serif; background: #f2f6ff; margin: 0; color: #222; }
-    header { background: #3157c8; color: white; text-align: center; padding: 25px 12px; }
-    main { max-width: 700px; margin: 25px auto; padding: 0 15px; }
-    .card { background: white; padding: 20px; margin-bottom: 18px; border-radius: 12px; box-shadow: 0 3px 12px #00000012; }
-    h1, h2 { margin-top: 0; }
-    input, select, button { padding: 11px; border-radius: 7px; border: 1px solid #ccd2df; font-size: 15px; }
-    input { width: 55%; max-width: 320px; }
-    button { background: #3157c8; color: white; border: none; cursor: pointer; }
-    button:hover { background: #2343a5; }
-    li { padding: 10px 0; border-bottom: 1px solid #eee; }
-    .done { text-decoration: line-through; color: #777; }
-    footer { text-align: center; color: #666; padding: 20px; }
-    @media (max-width: 520px) { input { width: 90%; margin-bottom: 8px; } select { margin-bottom: 8px; } }
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+      color: #202938;
+    }
+
+    header {
+      background: linear-gradient(135deg, #173b78, #4269c8);
+      color: white;
+      padding: 35px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 12px;
+      font-size: 36px;
+    }
+
+    header p {
+      margin: 0;
+      color: #e1eaff;
+      font-size: 16px;
+    }
+
+    nav {
+      background: white;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 8px #0000000c;
+    }
+
+    nav a {
+      color: #234b96;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 18px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .intro h2 {
+      font-size: 27px;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      color: #647084;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin: 25px 0;
+    }
+
+    input,
+    select,
+    button {
+      font: inherit;
+      padding: 11px 14px;
+      border-radius: 8px;
+    }
+
+    input,
+    select {
+      border: 1px solid #d5dbea;
+      background: white;
+    }
+
+    input {
+      width: 280px;
+      max-width: 100%;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      background: #315bc2;
+      color: white;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #23469a;
+    }
+
+    .section-heading {
+      margin: 32px 0 18px;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .event-card {
+      background: white;
+      border: 1px solid #e7eaf2;
+      border-radius: 13px;
+      padding: 22px;
+      box-shadow: 0 4px 15px #182b4b0a;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event-icon {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .category {
+      display: inline-block;
+      align-self: flex-start;
+      background: #eaf0ff;
+      color: #2c50a0;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .event-card h3 {
+      margin: 14px 0 8px;
+    }
+
+    .event-card p {
+      color: #626d80;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .event-info {
+      font-size: 13px;
+      color: #46546a;
+      margin: 5px 0;
+    }
+
+    .event-card button {
+      margin-top: auto;
+      padding: 11px;
+    }
+
+    .event-card .registered {
+      background: #23845a;
+    }
+
+    .event-card .registered:hover {
+      background: #176641;
+    }
+
+    .empty-message {
+      text-align: center;
+      color: #69758a;
+      padding: 30px;
+      display: none;
+    }
+
+    .notice {
+      text-align: center;
+      margin-top: 25px;
+      color: #647084;
+      font-size: 13px;
+    }
+
+    footer {
+      background: #172b4d;
+      color: white;
+      text-align: center;
+      padding: 22px 15px;
+      margin-top: 45px;
+    }
+
+    footer p {
+      margin: 5px;
+      color: #dce5f6;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .event-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 540px) {
+      header h1 {
+        font-size: 28px;
+      }
+
+      .event-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 6px;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+
+      .controls input,
+      .controls select,
+      .controls button {
+        width: 100%;
+      }
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <h1>My Study Planner</h1>
-    <p>Plan your tasks. Finish on time.</p>
+    <h1>Campus Event Hub</h1>
+    <p>Discover campus events. Explore your interests. Join the excitement!</p>
   </header>
-  <main>
-    <section class="card">
-      <h2>Add a Study Task</h2>
-      <form id="task-form">
-        <input id="task-name" type="text" placeholder="Enter task name" required>
-        <select id="subject">
-          <option>DevOps</option>
-          <option>DBMS</option>
-          <option>Machine Learning</option>
-          <option>Cloud Computing</option>
-          <option>Other</option>
-        </select>
-        <button type="submit">Add Task</button>
-      </form>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#events">Explore Events</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <main id="home">
+    <section class="intro">
+      <h2>What's Happening on Campus?</h2>
+      <p>
+        Find workshops, technical events, cultural programs and sports
+        activities in one place. Explore the events and register your interest!
+      </p>
     </section>
-    <section class="card">
-      <h2>My Tasks (<span id="count">0</span>)</h2>
-      <ul id="task-list"></ul>
-      <p id="empty">No tasks yet. Add your first study task!</p>
+
+    <section id="events">
+      <h2 class="section-heading">Explore Events</h2>
+
+      <div class="controls">
+        <input
+          type="search"
+          id="search"
+          placeholder="Search campus events..."
+          aria-label="Search campus events"
+        >
+
+        <select id="category-filter" aria-label="Filter by category">
+          <option value="All">All Categories</option>
+          <option value="Technical">Technical</option>
+          <option value="Cultural">Cultural</option>
+          <option value="Sports">Sports</option>
+          <option value="Workshop">Workshop</option>
+        </select>
+      </div>
+
+      <div class="event-grid" id="event-grid"></div>
+
+      <p class="empty-message" id="empty-message">
+        No events found. Try another search or category.
+      </p>
+
+      <p class="notice" id="event-count"></p>
+    </section>
+
+    <section id="about" class="intro">
+      <h2>About Campus Event Hub</h2>
+      <p>
+        Campus Event Hub is a student-friendly website that helps students
+        discover campus activities and express interest in events.
+      </p>
     </section>
   </main>
-  <footer>ISE-2 DevOps and Kubernetes Project</footer>
+
+  <footer>
+    <h3>Campus Event Hub</h3>
+    <p>ISE-2 DevOps and Kubernetes Project</p>
+    <p>Built using HTML, CSS, JavaScript, GitHub and Jenkins.</p>
+  </footer>
+
   <script>
-    const form = document.getElementById('task-form');
-    const nameInput = document.getElementById('task-name');
-    const subjectInput = document.getElementById('subject');
-    const list = document.getElementById('task-list');
-    const empty = document.getElementById('empty');
-    const count = document.getElementById('count');
-    let tasks = [];
+    const events = [
+      {
+        id: 1,
+        title: "AI and Machine Learning Workshop",
+        category: "Workshop",
+        icon: "🤖",
+        date: "15 November 2026",
+        venue: "Computer Lab",
+        description: "Explore AI concepts and learn about machine learning applications."
+      },
+      {
+        id: 2,
+        title: "Coding Challenge",
+        category: "Technical",
+        icon: "💻",
+        date: "20 November 2026",
+        venue: "Seminar Hall",
+        description: "Test your programming and problem-solving skills."
+      },
+      {
+        id: 3,
+        title: "Cultural Fest",
+        category: "Cultural",
+        icon: "🎭",
+        date: "25 November 2026",
+        venue: "College Auditorium",
+        description: "Enjoy music, dance and student cultural performances."
+      },
+      {
+        id: 4,
+        title: "Web Development Workshop",
+        category: "Workshop",
+        icon: "🌐",
+        date: "28 November 2026",
+        venue: "Computer Lab",
+        description: "Learn the basics of creating modern websites."
+      },
+      {
+        id: 5,
+        title: "Inter-Department Sports",
+        category: "Sports",
+        icon: "🏆",
+        date: "5 December 2026",
+        venue: "College Ground",
+        description: "Participate in fun sporting activities with other students."
+      },
+      {
+        id: 6,
+        title: "Project Innovation Day",
+        category: "Technical",
+        icon: "💡",
+        date: "10 December 2026",
+        venue: "Innovation Centre",
+        description: "Explore student projects, creative ideas and new technology."
+      }
+    ];
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      const name = nameInput.value.trim();
-      if (name === '') return;
+    const grid = document.getElementById("event-grid");
+    const search = document.getElementById("search");
+    const filter = document.getElementById("category-filter");
+    const emptyMessage = document.getElementById("empty-message");
+    const eventCount = document.getElementById("event-count");
 
-      tasks.push({ name: name, subject: subjectInput.value, done: false });
-      nameInput.value = '';
-      showTasks();
-    });
+    const interestedEvents = new Set();
 
-    function showTasks() {
-      list.innerHTML = '';
-      tasks.forEach(function(task, index) {
-        const item = document.createElement('li');
-        const label = document.createElement('span');
-        label.textContent = task.name + ' (' + task.subject + ') ';
-        if (task.done) label.className = 'done';
+    function showEvents() {
+      const searchText = search.value.trim().toLowerCase();
+      const selectedCategory = filter.value;
 
-        const doneButton = document.createElement('button');
-        doneButton.textContent = task.done ? 'Undo' : 'Done';
-        doneButton.style.marginRight = '6px';
-        doneButton.addEventListener('click', function() {
-          tasks[index].done = !tasks[index].done;
-          showTasks();
-        });
+      const filteredEvents = events.filter(function(event) {
+        const matchesSearch =
+          event.title.toLowerCase().includes(searchText) ||
+          event.description.toLowerCase().includes(searchText) ||
+          event.venue.toLowerCase().includes(searchText);
 
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.addEventListener('click', function() {
-          tasks.splice(index, 1);
-          showTasks();
-        });
+        const matchesCategory =
+          selectedCategory === "All" ||
+          event.category === selectedCategory;
 
-        item.append(label, doneButton, deleteButton);
-        list.appendChild(item);
+        return matchesSearch && matchesCategory;
       });
-      count.textContent = tasks.length;
-      empty.style.display = tasks.length === 0 ? 'block' : 'none';
+
+      grid.innerHTML = "";
+
+      filteredEvents.forEach(function(event) {
+        const card = document.createElement("article");
+        card.className = "event-card";
+
+        const icon = document.createElement("div");
+        icon.className = "event-icon";
+        icon.textContent = event.icon;
+
+        const category = document.createElement("span");
+        category.className = "category";
+        category.textContent = event.category;
+
+        const title = document.createElement("h3");
+        title.textContent = event.title;
+
+        const description = document.createElement("p");
+        description.textContent = event.description;
+
+        const date = document.createElement("div");
+        date.className = "event-info";
+        date.textContent = "📅 " + event.date;
+
+        const venue = document.createElement("div");
+        venue.className = "event-info";
+        venue.textContent = "📍 " + event.venue;
+
+        const button = document.createElement("button");
+        const isInterested = interestedEvents.has(event.id);
+
+        button.textContent = isInterested
+          ? "Interested ✓"
+          : "Register Interest";
+
+        if (isInterested) {
+          button.classList.add("registered");
+        }
+
+        button.addEventListener("click", function() {
+          if (interestedEvents.has(event.id)) {
+            interestedEvents.delete(event.id);
+          } else {
+            interestedEvents.add(event.id);
+          }
+
+          showEvents();
+        });
+
+        card.append(
+          icon,
+          category,
+          title,
+          description,
+          date,
+          venue,
+          button
+        );
+
+        grid.appendChild(card);
+      });
+
+      emptyMessage.style.display =
+        filteredEvents.length === 0 ? "block" : "none";
+
+      eventCount.textContent =
+        "Showing " + filteredEvents.length + " of " +
+        events.length + " sample events.";
     }
+
+    search.addEventListener("input", showEvents);
+    filter.addEventListener("change", showEvents);
+
+    showEvents();
   </script>
 </body>
 </html>
