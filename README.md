@@ -77,6 +77,20 @@ The Jenkinsfile defines a pipeline to check out the repository and validate requ
 4. Click Register Interest to mark your interest.
 5. Click Interested again to undo your selection.
 
+## 📸 Project Screenshots
+
+### 1. Project Homepage
+![Project Homepage](Screenshot%202026-10-21%20154427.png)
+
+### 2. Project Code
+![Project Code](Screenshot%202026-10-21%20154452.png)
+
+### 3. Project Progress
+![Project Progress](Screenshot%202026-10-21%20154734.png)
+
+### 4. Additional Project Screenshot
+![Additional Screenshot](Screenshot%202026-10-21%20154936.png)
+
 
 ## Note
 The displayed events are sample events for demonstration purposes.
