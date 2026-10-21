@@ -85,8 +85,13 @@ The Jenkinsfile defines a pipeline to check out the repository and validate requ
 ### 2. Project or Jenkins Code
 ![Project or Jenkins Code](Screenshot%202026-10-21%20154452.png)
 
-### 3. Project Images
-![Project Images](Screenshot%202026-10-21%20160113.png)
+
+## 📸 Project Progress
+
+The following screenshot shows the current progress of the Campus Event Hub project.
+
+![Campus Event Hub Project Progress](https://github.com/sarthak262006-design/campus-event-hub/blob/main/Screenshot%202026-10-21%20160113.png?raw=true)
+
 
 ### 4. Additional Project Screenshot
 ![Additional Screenshot](Screenshot%202026-10-21%20154936.png)
