@@ -79,14 +79,14 @@ The Jenkinsfile defines a pipeline to check out the repository and validate requ
 
 ## 📸 Project Screenshots
 
-### 1. Project Homepage
-![Project Homepage](Screenshot%202026-10-21%20154427.png)
+### 1. Github
+![Github Homepage](Screenshot%202026-10-21%20154427.png)
 
-### 2. Project Code
-![Project Code](Screenshot%202026-10-21%20154452.png)
+### 2. Project or Jenkins Code
+![Project or Jenkins Code](Screenshot%202026-10-21%20154452.png)
 
-### 3. Project Progress
-![Project Progress](Screenshot%202026-10-21%20154734.png)
+### 3. Project Images
+![Project Images](Screenshot%202026-10-21%20160113.png)
 
 ### 4. Additional Project Screenshot
 ![Additional Screenshot](Screenshot%202026-10-21%20154936.png)
